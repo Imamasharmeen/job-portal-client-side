@@ -1,8 +1,12 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../Auth/AuthProvider";
+import { FcGoogle } from "react-icons/fc";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import auth from "../Firebase/firebase.init";
 
 const Login = () => {
-    const {userSignIn} = useContext(AuthContext)
+    const {userSignIn,googleLogin} = useContext(AuthContext)
+
 
     const handleLogin =(e) => {
         e.preventDefault()
@@ -12,10 +16,24 @@ const Login = () => {
         console.log( email, password);
 
         userSignIn(email, password)
+      
         .then((result) =>{
             console.log(result)
         })
+
+        const googleLogin =() =>{
+            googleLogin()
+            .then((result) =>{
+                console.log(result.user)
+            })
+            .catch((error) =>{
+                console.log(error)
+            })
+        }
+       
     }
+
+ 
  
   return (
     <div>
@@ -24,6 +42,14 @@ const Login = () => {
           <div className="hero-content flex-col ">
             <div className="text-center lg:text-left">
               <h1 className="text-5xl font-bold">Log in!</h1>
+            </div>
+
+            <div>
+            
+          <button onClick={googleLogin} className="border-2 rounded-xl px-4 py-2 mb-4 w-full flex  gap-7 items-center">
+          <FcGoogle />Log in with Google
+          </button>
+          <p className="pb-3 text-center">______ or Log in with google ______</p>
             </div>
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
               <form onSubmit={handleLogin} className="card-body">
