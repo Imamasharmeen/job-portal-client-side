@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../Auth/AuthProvider';
 
 const Register = () => {
+    const {createUser} = useContext(AuthContext)
 
         const handleRegister = (e) =>{
-            const {createUser} = useContext(AuthContext)
+            
             e.preventDefault()
 
             const name = e.target.name.value;
@@ -82,6 +83,7 @@ const Register = () => {
                 required
               />
             </div>
+            <button className='btn bg-blue-300'>Register</button>
            
           </form>
         </div>
